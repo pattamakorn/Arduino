@@ -4,8 +4,6 @@
 #define BUTTON_PIN_1 D6
 #define BUTTON_PIN_2 D7
 #define BUTTON_PIN_0 D5
-
-
 #define LED_PIN_1 D0
 #define LED_PIN_2 D3
 #define LED_PIN_3 D4
@@ -21,7 +19,7 @@ int ledState2 = LOW;
 int ledState3 = LOW;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(BUTTON_PIN_0,INPUT_PULLUP);
   debouncer1.attach(BUTTON_PIN_0);
   debouncer1.interval(5);

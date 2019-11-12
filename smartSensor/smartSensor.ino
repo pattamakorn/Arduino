@@ -73,7 +73,7 @@ void sentData(){
   outputValue = map(sensorValue, 0, 1023, 0, 255);
   Serial.println(outputValue);
   //แสง
-  int light = adc.readADC(7);   
+  int light = adc.readADC(0);   
   Serial.println(light);
   //เคลื่อนไหว
   motion = digitalRead(inPin);
