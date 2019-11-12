@@ -15,7 +15,7 @@ RTC_DS3231 RTC;
 
 int ledState = LOW;
 #define ESP_AP_NAME "Swicth V1.2"
-String idmmachine = "34";
+String idmmachine = "switch01";
 String idsensor = "sensor1";
 int light;
 int motion;
@@ -209,7 +209,7 @@ void loadstimeshr(){
 void loadstatus(){
     if (WiFi.status() == WL_CONNECTED) { 
     HTTPClient http;
-    http.begin("http://203.154.83.137/SmartRoom/onoffswitch.php?mid="+String(idmmachine));
+    http.begin("http://203.154.83.137/SmartRoom/state.php?mid="+String(idmmachine));
     int httpCode = http.GET();
     if (httpCode > 0) {
     String payload = http.getString(); 

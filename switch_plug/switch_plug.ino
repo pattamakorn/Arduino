@@ -14,8 +14,8 @@ RTC_DS3231 RTC;
 #define LAMP_PIN D4
 
 int ledState = LOW;
-#define ESP_AP_NAME "Swicth V1.2"
-String idmmachine = "34";
+#define ESP_AP_NAME "Swicth&Plug V.1"
+String idmmachine = "SwicthPlug01";
 String idsensor = "sensor1";
 int light;
 int motion;
@@ -93,21 +93,21 @@ void loop() {
     Serial.print(stoptimehr);Serial.print(" : ");Serial.println(stoptimemin);
 
     if ((now.hour() >= starttimehr and now.minute() >= starttimemin) and (now.hour() <= stoptimehr and now.minute() <= stoptimemin)) {
+             digitalWrite(PLUG_PIN,HIGH);
              if(light >= 500){
               ledState = 1;
-              digitalWrite(PLUG_PIN,ledState);
               digitalWrite(LAMP_PIN,ledState);
               }else if(light < 500){
                 ledState = 0;
-                digitalWrite(PLUG_PIN,ledState);
                 digitalWrite(LAMP_PIN,ledState);
                 }
          }
        if (now.hour() >= stoptimehr and now.minute() >= stoptimemin) {
+             
               if(ledState == 1 or motion == 1 or State == 1){
                 //ledState = 1;
-                  digitalWrite(PLUG_PIN,HIGH);
-                  digitalWrite(LAMP_PIN,HIGH);
+                digitalWrite(PLUG_PIN,HIGH);
+                digitalWrite(LAMP_PIN,HIGH);
               }else if(ledState == 0 and motion == 0 and State == 0){
                 //ledState = 0;
                  digitalWrite(PLUG_PIN,LOW);
@@ -210,7 +210,7 @@ void loadstimeshr(){
 void loadstatus(){
     if (WiFi.status() == WL_CONNECTED) { 
     HTTPClient http;
-    http.begin("http://203.154.83.137/SmartRoom/onoffswitch.php?mid="+String(idmmachine));
+    http.begin("http://203.154.83.137/SmartRoom/state.php?mid="+String(idmmachine));
     int httpCode = http.GET();
     if (httpCode > 0) {
     String payload = http.getString(); 
@@ -226,7 +226,7 @@ void curent(){
       float curent = ((((value-10)*5)/1024)/0.185);
       Serial.println((((value-10)*5)/1024)/0.185);
     HTTPClient http;
-    http.begin("http://203.154.83.137/SmartRoom/onoffswitch.php?mid="+String(idmmachine)+""+String(curent));
+    http.begin("http://203.154.83.137/SmartRoom/curent.php?id="+String(idmmachine)+"&volt="+String(curent));
     int httpCode = http.GET();
     if (httpCode > 0) {
     String payload = http.getString(); 
