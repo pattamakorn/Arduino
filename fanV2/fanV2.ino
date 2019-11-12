@@ -53,9 +53,6 @@ void loop() {
   if ( debouncer1.fell() ) {
     ledState0 = !ledState0;
     Serial.print("Num 0 = ");Serial.println(ledState0);
-    digitalWrite(LED_PIN_1,HIGH);
-    digitalWrite(LED_PIN_2,HIGH);
-    digitalWrite(LED_PIN_3,HIGH);
    }
 
    if ( debouncer2.fell() ) {
@@ -75,21 +72,49 @@ void loop() {
    }
 
    if(ledState0 == 1){
+    ledState1 = 0;
+    ledState2 = 0;
+    ledState3 = 0;
+    Serial.print("Num 0 = ");Serial.println(ledState0);
+    Serial.print("Num 1 = ");Serial.println(ledState1);
+    Serial.print("Num 2 = ");Serial.println(ledState2);
+    Serial.print("Num 3 = ");Serial.println(ledState3);
     digitalWrite(LED_PIN_1,HIGH);
     digitalWrite(LED_PIN_2,HIGH);
     digitalWrite(LED_PIN_3,HIGH);
     }
     if(ledState1 == 1){
+    ledState0 = 0;
+    ledState2 = 0;
+    ledState3 = 0;
+    Serial.print("Num 0 = ");Serial.println(ledState0);
+    Serial.print("Num 1 = ");Serial.println(ledState1);
+    Serial.print("Num 2 = ");Serial.println(ledState2);
+    Serial.print("Num 3 = ");Serial.println(ledState3);
     digitalWrite(LED_PIN_1,LOW);
     digitalWrite(LED_PIN_2,HIGH);
     digitalWrite(LED_PIN_3,HIGH);
     }
     if(ledState2 == 1){
+    ledState1 = 0;
+    ledState0 = 0;
+    ledState3 = 0;
+    Serial.print("Num 0 = ");Serial.println(ledState0);
+    Serial.print("Num 1 = ");Serial.println(ledState1);
+    Serial.print("Num 2 = ");Serial.println(ledState2);
+    Serial.print("Num 3 = ");Serial.println(ledState3);
     digitalWrite(LED_PIN_1,HIGH);
     digitalWrite(LED_PIN_2,LOW);
     digitalWrite(LED_PIN_3,HIGH);
     }
     if(ledState3 == 1){
+    ledState1 = 0;
+    ledState2 = 0;
+    ledState0 = 0;
+    Serial.print("Num 0 = ");Serial.println(ledState0);
+    Serial.print("Num 1 = ");Serial.println(ledState1);
+    Serial.print("Num 2 = ");Serial.println(ledState2);
+    Serial.print("Num 3 = ");Serial.println(ledState3);
     digitalWrite(LED_PIN_1,HIGH);
     digitalWrite(LED_PIN_2,HIGH);
     digitalWrite(LED_PIN_3,LOW);
