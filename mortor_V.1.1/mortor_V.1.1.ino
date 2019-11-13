@@ -37,16 +37,18 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(drape);
-  if(drape == 1){
+  for(int i = 0 ; i < 5000 ; i++){
+    if(i < 2500){
     OneStep(true);
     delay(2);
     }
 
-    if(drape == 0){
+    if(i > 2500){
     OneStep(false);
     delay(2);
     }
+    }
+  Serial.println(drape);
 }
 
 
