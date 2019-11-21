@@ -62,7 +62,6 @@ void loop () {
     loadtimesmin();
     loadstimesmin();
     loadstimeshr();
-    control();
     Serial.print("Status : ");Serial.println(statusm);
     Serial.print(starttimehr);Serial.print(" : ");Serial.println(starttimemin);
     Serial.print(stoptimehr);Serial.print(" : ");Serial.println(stoptimemin);
@@ -96,17 +95,7 @@ void loop () {
           }
       
           if (now.hour() == stoptimehr and now.minute() == stoptimemin) {
-            Serial.println("LOw");
-            digitalWrite(led,LOW);
-            if (WiFi.status() == WL_CONNECTED) { 
-                    HTTPClient http;
-                    http.begin("http://203.154.83.137/SmartRoom/setcontrolplug.php?id="+String(idmmachine)+"&status=0");
-                    int httpCode = http.GET();
-                    if (httpCode > 0) {
-                    String payload = http.getString();
-                    }
-                    http.end();
-                  }
+            control();
           }
     Serial.println();
     delay(3000);
@@ -202,15 +191,3 @@ void control(){
     http.end();
     }
 }
-
-//void setcontrol(){
-//    if (WiFi.status() == WL_CONNECTED) { 
-//    HTTPClient http;
-//    http.begin("http://203.154.83.137/SmartRoom/setcontrolplug.php?mid="+String(idmmachine)+"&status="+String(setstatus));
-//    int httpCode = http.GET();
-//    if (httpCode > 0) {
-//    String payload = http.getString();
-//    }
-//    http.end();
-//    }
-//}

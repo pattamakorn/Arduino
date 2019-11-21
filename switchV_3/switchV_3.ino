@@ -104,11 +104,11 @@ void loop() {
                 }
          }
        if (now.hour() >= stoptimehr and now.minute() >= stoptimemin) {
-              if(ledState == 1 or motion == 1 or State == 1){
+              if(ledState == 1){
                 //ledState = 1;
                  digitalWrite(LED_PIN,HIGH);
                  digitalWrite(LED_PIN2,HIGH);
-              }else if(ledState == 0 and motion == 0 and State == 0){
+              }else if(ledState == 0){
                 //ledState = 0;
                  digitalWrite(LED_PIN,LOW);
                  digitalWrite(LED_PIN2,LOW);
@@ -123,6 +123,15 @@ void loop() {
      ledState = !ledState; // Toggle LED state
      digitalWrite(LED_PIN2,ledState);
      digitalWrite(LED_PIN,ledState); // Apply new LED state
+     if (WiFi.status() == WL_CONNECTED) { 
+            HTTPClient http;
+            http.begin("http://203.154.83.137/SmartRoom/setcontrolplug.php?id="+String(idmmachine)+"&status="+String(ledState));
+            int httpCode = http.GET();
+            if (httpCode > 0) {
+               String payload = http.getString();
+             }
+                    http.end();
+       }
    }
 }
 
@@ -214,6 +223,7 @@ void loadstatus(){
     if (httpCode > 0) {
     String payload = http.getString(); 
     State = payload.toInt();
+    ledState = State;
     }
     http.end();
     }
