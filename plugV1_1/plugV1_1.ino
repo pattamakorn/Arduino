@@ -31,7 +31,7 @@ void setup () {
     Wire.begin();
     RTC.begin();
     digitalWrite(led,LOW);
-  RTC.adjust(DateTime(__DATE__, __TIME__));
+  RTC.adjust(DateTime(__DATE__, __TIME__));//ลบเมื่อตั้งเวลาเสร็จ
   if (! RTC.isrunning()) {
     Serial.println("RTC is NOT running!");
     // following line sets the RTC to the date & time this sketch was compiled
